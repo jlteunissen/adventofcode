@@ -1,7 +1,9 @@
 repos:
--   repo: https://github.com/mwouts/jupytext
-    rev: v1.14.7  # Replace with the desired version (CURRENT_TAG/COMMIT_HASH)
+  - repo: local
     hooks:
-    - id: jupytext
-      args: [--sync]
-
+      - id: jupyter-nb-clear-output
+        name: jupyter-nb-clear-output
+        files: \.ipynb$
+        stages: [commit]
+        language: system
+        entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
